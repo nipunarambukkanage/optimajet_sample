@@ -1,0 +1,25 @@
+[
+  {
+    "Header": "Custom Templates"
+  },
+  {
+    "Title": "DDOT PERMIT Template 1",
+    "Description": "Simple scheme with three elements connected by auto transitions.",
+    "File": "library/AutoTransitions.xml"
+  },
+  {
+    "Title": "DDOT PERMIT Template 2",
+    "Description": "Simple scheme with three elements (incl. approval command) connected by direct transitions.",
+    "File": "library/DirectTransitionsWithApproval.xml"
+  },
+  {
+    "Title": "DDOT PERMIT Template 2",
+    "Description": "Simple scheme with three elements(incl. approval and deny commands) connected by direct and reverse transitions.",
+    "File": "library/DirectAndReverseTransitionsWithApprovalAndDeny.xml"
+  },
+  {
+    "Title": "DDOT PERMIT Template with Timer",
+    "Description": "Simple scheme with two elements connected by transitions with timers.",
+    "File": "library/Timer.xml"
+  }
+]
