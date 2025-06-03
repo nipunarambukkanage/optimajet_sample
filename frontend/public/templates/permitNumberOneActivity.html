@@ -15,10 +15,10 @@
       </el-form-item>
     </div>
     <el-form-item size="small">
-      <!-- <el-checkbox v-model="FormData.IsInitial" :disabled="readonly" :label="labels.IsInitial" name="type"
+      <el-checkbox v-model="FormData.IsInitial" :disabled="readonly" :label="labels.IsInitial" name="type"
                    @change="onInitialChange"></el-checkbox>
       <el-checkbox v-model="FormData.IsFinal" :disabled="readonly" :label="labels.IsFinal" name="type"
-                   @change="onFinalChange"></el-checkbox> -->
+                   @change="onFinalChange"></el-checkbox>
       <el-checkbox v-model="FormData.IsForSetState" :disabled="readonly" :label="labels.IsForSetState" name="type"></el-checkbox>
       <el-checkbox v-model="FormData.IsAutoSchemeUpdate" :disabled="readonly" :label="labels.IsAutoSchemeUpdate" name="type"></el-checkbox>
       <el-checkbox v-if="expertMode" v-model="disableAllPersist" :disabled="readonly" :indeterminate="isIndeterminate"
@@ -467,8 +467,8 @@
       // formdata.ExceptionsHandler = item.ExceptionsHandler ? WorkflowDesignerCommon.clone(item.ExceptionsHandler) : {RetryCount:"1", Exceptions:[]};
       formdata.ExceptionsHandlers = Array.isArray(item.ExceptionsHandlers) ? WorkflowDesignerCommon.clone(item.ExceptionsHandlers) : [];
       formdata.State = item.State;
-      formdata.IsInitial = true;
-      formdata.IsFinal = false;
+      formdata.IsInitial = item.IsInitial;
+      formdata.IsFinal = item.IsFinal;
       formdata.IsForSetState = item.IsForSetState;
       formdata.IsAutoSchemeUpdate = item.IsAutoSchemeUpdate;
       formdata.DisablePersistState = item.DisablePersistState;
@@ -578,15 +578,15 @@
       me.VueConfig.data.prevName = value;
     };
 
-        // me.VueConfig.methods.onInitialChange = function(){
-        //     var formdata = me.VueConfig.data.FormData;
-        //     formdata.IsFinal = formdata.IsInitial ? false : formdata.IsFinal;
-        // };
+        me.VueConfig.methods.onInitialChange = function(){
+            var formdata = me.VueConfig.data.FormData;
+            formdata.IsFinal = formdata.IsInitial ? false : formdata.IsFinal;
+        };
 
-        // me.VueConfig.methods.onFinalChange = function(){
-        //     var formdata = me.VueConfig.data.FormData;
-        //     formdata.IsInitial = formdata.IsFinal ? false : formdata.IsInitial;
-        // };
+        me.VueConfig.methods.onFinalChange = function(){
+            var formdata = me.VueConfig.data.FormData;
+            formdata.IsInitial = formdata.IsFinal ? false : formdata.IsInitial;
+        };
 
     me.VueConfig.methods.handleCheckAllPersistsChange = function (val) {
       me.VueConfig.data.checkedPersists = val ? me.VueConfig.data.persists : [];
