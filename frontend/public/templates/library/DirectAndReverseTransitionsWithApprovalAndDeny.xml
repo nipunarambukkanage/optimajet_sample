@@ -9,7 +9,7 @@
     <Activity Name="Created" State="Created" IsInitial="True" IsFinal="False" IsForSetState="True" IsAutoSchemeUpdate="True" WasInlined="true" OriginalName="Created" OriginalSchemeCode="DirectTransitionsWithApproval">
       <Designer X="940" Y="400" Hidden="false" />
     </Activity>
-    <Activity Name="PendingApproval" State="PendingApproval" IsInitial="False" IsFinal="False" IsForSetState="True" IsAutoSchemeUpdate="True" WasInlined="true" OriginalName="PendingApproval" OriginalSchemeCode="DirectTransitionsWithApproval">
+    <Activity Name="PendingDDOTApproval" State="PendingApproval" IsInitial="False" IsFinal="False" IsForSetState="True" IsAutoSchemeUpdate="True" WasInlined="true" OriginalName="PendingApproval" OriginalSchemeCode="DirectTransitionsWithApproval">
       <Designer X="1230" Y="400" Hidden="false" />
     </Activity>
     <Activity Name="Approved" State="Approved" IsInitial="False" IsFinal="True" IsForSetState="True" IsAutoSchemeUpdate="True" WasInlined="true" OriginalName="Approved" OriginalSchemeCode="DirectTransitionsWithApproval">

@@ -180,6 +180,8 @@
     };
 
         me.VueConfig.methods.onSave = function(){
+            console.log('onSave items', me.VueConfig.data.items);
+            console.log('me.graph.data.Parameters', me.graph.data.Parameters);
             if(me.VueConfig.methods.validate && me.VueConfig.methods.validate()){
                 me.graph.UpdateData(me.graph.data.Parameters, me.VueConfig.data.items);
                 me.onClose(true);

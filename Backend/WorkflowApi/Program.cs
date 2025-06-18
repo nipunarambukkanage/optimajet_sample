@@ -1,3 +1,5 @@
+﻿using WorkflowApi.Utils; // Make sure this is included at the top
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,20 +13,23 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// ✅ Load and sync XML scheme BEFORE running the app
+await WorkflowSchemeLoader.EnsureSchemeIsUpToDateAsync(
+    "permit_approval_process_2",
+    Path.Combine(app.Environment.ContentRootPath, "Schemes", "permit_approval_process_2.xml")
+);
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseCors(rule);
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

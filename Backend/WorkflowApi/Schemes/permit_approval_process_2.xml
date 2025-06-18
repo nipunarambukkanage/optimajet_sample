@@ -1,0 +1,77 @@
+﻿<Process Name="permit_approval_process_2" CanBeInlined="false" Tags="" LogEnabled="true">
+	<Designer />
+
+	<Commands>
+		<Command Name="Start" />
+		<Command Name="Approve" />
+		<Command Name="Reject" />
+	</Commands>
+
+	<Timers>
+		<Timer Name="Reminder" Type="Time" Value="00:01:00" NotOverrideIfExists="false" />
+	</Timers>
+
+	<Activities>
+		<Activity Name="StartPermit" Type="PermitNumberOneActivity" State="StartPermit" IsInitial="true" IsFinal="false" IsForSetState="true" IsAutoSchemeUpdate="true">
+			<Designer X="300" Y="100" Hidden="false" />
+		</Activity>
+
+		<Activity Name="VerifyPermit" Type="PermitNumberTwoActivity" State="VerifyPermit" IsInitial="false" IsFinal="false" IsForSetState="true" IsAutoSchemeUpdate="true">
+			<Designer X="600" Y="100" Hidden="false" />
+		</Activity>
+
+		<Activity Name="FinalizePermit" Type="PermitNumberThreeActivity" State="FinalizePermit" IsInitial="false" IsFinal="false" IsForSetState="true" IsAutoSchemeUpdate="true">
+			<Designer X="900" Y="100" Hidden="false" />
+		</Activity>
+
+		<Activity Name="WeatherCheck" Type="WeatherActivity" State="WeatherCheck" IsInitial="false" IsFinal="false" IsForSetState="true" IsAutoSchemeUpdate="true">
+			<Designer X="600" Y="250" Hidden="false" />
+		</Activity>
+
+		<Activity Name="Complete" Type="PermitNumberFourActivity" State="Complete" IsInitial="false" IsFinal="true" IsForSetState="true" IsAutoSchemeUpdate="true">
+			<Designer X="1200" Y="100" Hidden="false" />
+		</Activity>
+	</Activities>
+
+	<Transitions>
+		<Transition Name="Start_to_Verify" From="StartPermit" To="VerifyPermit" Classifier="Direct">
+			<Triggers>
+				<Trigger Type="Command" NameRef="Start" />
+			</Triggers>
+			<Conditions>
+				<Condition Type="Always" />
+			</Conditions>
+			<Designer X="450" Y="100" Hidden="false" />
+		</Transition>
+
+		<Transition Name="Verify_to_Weather" From="VerifyPermit" To="WeatherCheck" Classifier="Direct">
+			<Triggers>
+				<Trigger Type="Command" NameRef="Approve" />
+			</Triggers>
+			<Conditions>
+				<Condition Type="Always" />
+			</Conditions>
+			<Designer X="600" Y="180" Hidden="false" />
+		</Transition>
+
+		<Transition Name="Weather_to_Finalize" From="WeatherCheck" To="FinalizePermit" Classifier="Direct">
+			<Triggers>
+				<Trigger Type="Timer" NameRef="Reminder" />
+			</Triggers>
+			<Conditions>
+				<Condition Type="Always" />
+			</Conditions>
+			<Designer X="750" Y="180" Hidden="false" />
+		</Transition>
+
+		<Transition Name="Finalize_to_Complete" From="FinalizePermit" To="Complete" Classifier="Direct">
+			<Triggers>
+				<Trigger Type="Command" NameRef="Approve" />
+			</Triggers>
+			<Conditions>
+				<Condition Type="Always" />
+			</Conditions>
+			<Designer X="1050" Y="100" Hidden="false" />
+		</Transition>
+	</Transitions>
+</Process>

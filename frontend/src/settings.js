@@ -1,4 +1,4 @@
-const backendUrl = 'http://localhost:5139';
+const backendUrl = 'https://localhost:7243';
 
 const settings = {
     workflowUrl: `${backendUrl}/api/workflow`,

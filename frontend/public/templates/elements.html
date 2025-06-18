@@ -94,7 +94,13 @@
 
         const allowed = window.DesignerConfig?.allowedActivities || [];
 
+        console.log('me.graph.data.AdditionalParams**************', me.graph.data.AdditionalParams);
+         console.log('me.graph.data**************', me);
+
+        
+
         CustomActivities?.forEach?.(item => {
+          
           if (allowed.includes(item.Type)) {
             item.Class = 'Custom';
             data.activities.push(item);

@@ -15,7 +15,7 @@
     </Activity>
   </Activities>
   <Transitions>
-    <Transition Name="Activity_Activity_1_1" To="PendingApproval" From="Created" Classifier="Direct" AllowConcatenationType="And" RestrictConcatenationType="And" ConditionsConcatenationType="And" DisableParentStateControl="false">
+    <Transition Name="DDOT_Test" To="PendingApproval" From="Created" Classifier="Direct" AllowConcatenationType="And" RestrictConcatenationType="And" ConditionsConcatenationType="And" DisableParentStateControl="false">
       <Triggers>
         <Trigger Type="Auto" />
       </Triggers>
