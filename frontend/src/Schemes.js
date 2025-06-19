@@ -18,13 +18,13 @@ const Schemes = (props) => {
         setData(schemes);
         const mainOnly = schemes.filter(
           (s) =>
-            s.code.startsWith("main_approval") && !s.code.includes("_child_")
+            s.code.startsWith("permit_main_approval") && !s.code.includes("_child_")
         );
         setMainSchemes(mainOnly);
 
         const children = schemes.filter(
           (s) =>
-            s.code.startsWith("main_approval") && s.code.includes("_child_")
+            s.code.startsWith("permit_main_approval") && s.code.includes("_child_")
         );
         setChildSchemes(children);
 
