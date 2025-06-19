@@ -1,4 +1,12 @@
-import { Dropdown, Loader, Button, Input, Message, Panel } from "rsuite";
+import {
+  Dropdown,
+  Loader,
+  Button,
+  Input,
+  Message,
+  Panel,
+  PanelGroup,
+} from "rsuite";
 import { useEffect, useState } from "react";
 import settings from "./settings";
 
@@ -18,13 +26,15 @@ const Schemes = (props) => {
         setData(schemes);
         const mainOnly = schemes.filter(
           (s) =>
-            s.code.startsWith("permit_main_approval") && !s.code.includes("_child_")
+            s.code.startsWith("permit_main_approval") &&
+            !s.code.includes("_child_")
         );
         setMainSchemes(mainOnly);
 
         const children = schemes.filter(
           (s) =>
-            s.code.startsWith("permit_main_approval") && s.code.includes("_child_")
+            s.code.startsWith("permit_main_approval") &&
+            s.code.includes("_child_")
         );
         setChildSchemes(children);
 
@@ -93,6 +103,13 @@ const Schemes = (props) => {
     );
   }
 
+  const groupedChildSchemes = mainSchemes.map((main) => ({
+    mainCode: main.code,
+    children: childSchemes.filter((child) =>
+      child.code.startsWith(main.code + "_child_")
+    ),
+  }));
+
   return (
     <div>
       <div style={{ margin: 50 }}>
@@ -155,14 +172,36 @@ const Schemes = (props) => {
 
       <div style={{ margin: 50 }}>
         <h5>Existing Sub Permit Workflows:</h5>
-        {childSchemes.length > 0 ? (
-          <Panel bordered>
-            {childSchemes.map((s) => (
-              <div key={s.code} style={{ padding: "5px 0" }}>
-                {s.code}
-              </div>
+        {groupedChildSchemes.length > 0 ? (
+          <PanelGroup accordion>
+            {groupedChildSchemes.map((group) => (
+              <Panel
+                key={group.mainCode}
+                header={group.mainCode}
+                defaultExpanded
+              >
+                {group.children.length > 0 ? (
+                  group.children.map((child) => (
+                    <div
+                      key={child.code}
+                      onClick={() => props.onRowClick?.(child)}
+                      style={{
+                        padding: "5px 0",
+                        cursor: "pointer",
+                        color: "#1675e0",
+                      }}
+                    >
+                      {child.code}
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ padding: "5px 0", fontStyle: "italic" }}>
+                    No sub workflows.
+                  </div>
+                )}
+              </Panel>
             ))}
-          </Panel>
+          </PanelGroup>
         ) : (
           <Message type="info">No child schemes found.</Message>
         )}
