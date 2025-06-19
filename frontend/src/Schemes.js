@@ -1,14 +1,21 @@
-import {
-  Dropdown,
-  Loader,
-  Button,
-  Input,
-  Message,
-  Panel,
-  PanelGroup,
-} from "rsuite";
+import { Dropdown, Loader, Button, Input, Message } from "rsuite";
 import { useEffect, useState } from "react";
 import settings from "./settings";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Box,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+const schemeNameMap = {
+  permit_main_approval_1: "Construction",
+  permit_main_approval_2: "Parking / Occupancy",
+  permit_main_approval_3: "Commercial Vehicle",
+  permit_main_approval_4: "Public Space Rental",
+};
 
 const Schemes = (props) => {
   const [data, setData] = useState([]);
@@ -105,6 +112,7 @@ const Schemes = (props) => {
 
   const groupedChildSchemes = mainSchemes.map((main) => ({
     mainCode: main.code,
+    displayName: schemeNameMap[main.code] || main.code,
     children: childSchemes.filter((child) =>
       child.code.startsWith(main.code + "_child_")
     ),
@@ -115,19 +123,20 @@ const Schemes = (props) => {
       <div style={{ margin: 50 }}>
         <h5>Select the main permit category:</h5>
         <Dropdown
-          style={{ padding: 20 }}
-          title={selectedMain?.code || "Select Main Scheme"}
+          style={{ padding: 20, fontSize: 18, width: 300 }}
+          title={schemeNameMap[selectedMain?.code] || "Select Main Scheme"}
         >
           {mainSchemes.map((main) => (
             <Dropdown.Item
               key={main.code}
+              style={{ padding: 20, fontSize: 18 }}
               onClick={() => {
                 setSelectedMain(main);
                 setError("");
                 setNewSchemeName("");
               }}
             >
-              {main.code}
+              {schemeNameMap[main.code] || main.code}
             </Dropdown.Item>
           ))}
         </Dropdown>
@@ -173,35 +182,43 @@ const Schemes = (props) => {
       <div style={{ margin: 50 }}>
         <h5>Existing Sub Permit Workflows:</h5>
         {groupedChildSchemes.length > 0 ? (
-          <PanelGroup accordion>
-            {groupedChildSchemes.map((group) => (
-              <Panel
-                key={group.mainCode}
-                header={group.mainCode}
-                defaultExpanded
-              >
+          groupedChildSchemes.map((group) => (
+            <Accordion
+              key={group.mainCode}
+              defaultExpanded={false}
+              sx={{ marginTop: 2 }}
+            >
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <h6>{group.displayName}</h6>
+              </AccordionSummary>
+              <AccordionDetails>
                 {group.children.length > 0 ? (
-                  group.children.map((child) => (
-                    <div
-                      key={child.code}
-                      onClick={() => props.onRowClick?.(child)}
-                      style={{
-                        padding: "5px 0",
-                        cursor: "pointer",
-                        color: "#1675e0",
-                      }}
-                    >
-                      {child.code}
-                    </div>
-                  ))
+                  group.children.map((child) => {
+                    const childName = child.code
+                      .replace(group.mainCode + "_child_", "")
+                      .replace(/_/g, " ");
+                    return (
+                      <Box
+                        key={child.code}
+                        onClick={() => props.onRowClick?.(child)}
+                        sx={{
+                          padding: "5px 0",
+                          cursor: "pointer",
+                          color: "#1675e0",
+                        }}
+                      >
+                        <h7>
+                          {group.displayName} - {childName}
+                        </h7>
+                      </Box>
+                    );
+                  })
                 ) : (
-                  <div style={{ padding: "5px 0", fontStyle: "italic" }}>
-                    No sub workflows.
-                  </div>
+                  <h7 sx={{ fontStyle: "italic" }}>No sub workflows.</h7>
                 )}
-              </Panel>
-            ))}
-          </PanelGroup>
+              </AccordionDetails>
+            </Accordion>
+          ))
         ) : (
           <Message type="info">No child schemes found.</Message>
         )}
