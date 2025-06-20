@@ -16,10 +16,6 @@
       </el-form-item>
     </div>
     <el-form-item size="small">
-      <el-checkbox v-model="FormData.IsInitial" :disabled="readonly" :label="labels.IsInitial" name="type"
-                   @change="onInitialChange"></el-checkbox>
-      <el-checkbox v-model="FormData.IsFinal" :disabled="readonly" :label="labels.IsFinal" name="type"
-                   @change="onFinalChange"></el-checkbox>
       <el-checkbox v-model="FormData.IsForSetState" :disabled="readonly" :label="labels.IsForSetState" name="type"></el-checkbox>
       <el-checkbox v-model="FormData.IsAutoSchemeUpdate" :disabled="readonly" :label="labels.IsAutoSchemeUpdate" name="type"></el-checkbox>
       <el-checkbox v-if="expertMode" v-model="disableAllPersist" :disabled="readonly" :indeterminate="isIndeterminate"
