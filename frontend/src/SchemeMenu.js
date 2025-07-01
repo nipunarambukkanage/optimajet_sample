@@ -2,10 +2,10 @@ import { Button, ButtonGroup } from "rsuite";
 import React from "react";
 
 const schemeNameMap = {
-  permit_main_approval_1: "Construction",
-  permit_main_approval_2: "Parking / Occupancy",
-  permit_main_approval_3: "Commercial Vehicle",
-  permit_main_approval_4: "Public Space Rental",
+  permit_type_main_for_engine_1: "Construction",
+  permit_type_main_for_engine_2: "Parking / Occupancy",
+  permit_type_main_for_engine_3: "Commercial Vehicle",
+  permit_type_main_for_engine_4: "Public Space Rental",
 };
 
 const SchemeMenu = (props) => {

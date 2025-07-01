@@ -33,7 +33,7 @@ const AppView = () => {
         processId: processId
     }
     return <Container>
-        <Header>
+        <Header style={{zIndex: 10, position: 'fixed', width: '100%'}}>
             <Navbar>
                 <Nav>
                     {items}

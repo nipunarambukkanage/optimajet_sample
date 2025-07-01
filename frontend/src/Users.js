@@ -1,30 +1,40 @@
-import {useEffect, useState} from "react";
-import {SelectPicker} from "rsuite";
+import { useEffect, useState } from "react";
+import { SelectPicker } from "rsuite";
 import settings from "./settings";
 
 const Users = (props) => {
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
-    const onChangeUser = user => {
-        props.onChangeUser?.(user);
-    }
+  const onChangeUser = (user) => {
+    props.onChangeUser?.(user);
+  };
 
-    useEffect(() => {
-        fetch(`${settings.userUrl}/all`)
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data);
-                onChangeUser(data[0].name)
-            })
-    }, []);
+  useEffect(() => {
+    fetch(`${settings.userUrl}/all`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data);
 
-    const data = users.map(u => {
-        const roles = u.roles.join(', ');
-        return ({label: `${u.name} (${roles})`, value: u.name})
-    });
+        if (data.length > 0) {
+          onChangeUser(data[0].name);
+        }
+      });
+  }, []);
 
-    return <SelectPicker data={data} style={{width: 224}} menuStyle={{zIndex: 1000}}
-                         value={props.currentUser} onChange={onChangeUser}/>
-}
+  const data = users.map((u) => ({
+    label: `${u.name} (${u.role})`,
+    value: u.name,
+  }));
+
+  return (
+    <SelectPicker
+      data={data}
+      style={{ width: 224 }}
+      menuStyle={{ zIndex: 1000 }}
+      value={props.currentUser}
+      onChange={onChangeUser}
+    />
+  );
+};
 
 export default Users;
