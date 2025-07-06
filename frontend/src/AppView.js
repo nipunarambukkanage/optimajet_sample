@@ -33,14 +33,14 @@ const AppView = () => {
         processId: processId
     }
     return <Container>
-        <Header style={{zIndex: 10, position: 'fixed', width: '100%'}}>
+        <Header style={{zIndex: 10, position: 'fixed', width: '100%', height: '60px'}}>
             <Navbar>
                 <Nav>
                     {items}
                 </Nav>
             </Navbar>
         </Header>
-        <Content>
+        <Content style={{marginTop: '60px', width: '100%'}}>
             <Child {...childProps}/>
         </Content>
     </Container>

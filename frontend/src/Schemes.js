@@ -11,10 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const schemeNameMap = {
-  permit_type_main_for_engine_1: "Construction",
-  permit_type_main_for_engine_2: "Parking / Occupancy",
-  permit_type_main_for_engine_3: "Commercial Vehicle",
-  permit_type_main_for_engine_4: "Public Space Rental",
+  commercial_vehicle_1: "Commercial Vehicle",
 };
 
 const Schemes = (props) => {
@@ -33,14 +30,14 @@ const Schemes = (props) => {
         setData(schemes);
         const mainOnly = schemes.filter(
           (s) =>
-            s.code.startsWith("permit_type_main_for_engine") &&
+            s.code.startsWith("commercial_vehicle") &&
             !s.code.includes("_child_")
         );
         setMainSchemes(mainOnly);
 
         const children = schemes.filter(
           (s) =>
-            s.code.startsWith("permit_type_main_for_engine") &&
+            s.code.startsWith("commercial_vehicle") &&
             s.code.includes("_child_")
         );
         setChildSchemes(children);
@@ -117,6 +114,8 @@ const Schemes = (props) => {
       child.code.startsWith(main.code + "_child_")
     ),
   }));
+
+  console.log("mainSchemes***********", mainSchemes)
 
   return (
     <div>

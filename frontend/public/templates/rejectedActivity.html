@@ -7,12 +7,11 @@
     <div class="SettingsWithPadding">
         <div class="el-form--inline el-form--label-top">
       <el-form-item :label="labels.Name" :rules="activityNameRules()" class="el-form-item" prop="Name" style="flex-grow: 1;">
-        <el-form-item :label="FormData.Name" class="el-form-item" prop="Name" style="flex-grow: 2;"></el-form-item>
-        <!-- <el-input v-model="FormData.Name" :placeholder="labels.Name" :readonly="true" @input="nameOnChange"></el-input> -->
+        
+        <el-input v-model="FormData.Name" :placeholder="labels.Name" :readonly="true" @input="nameOnChange"></el-input>
       </el-form-item>
       <el-form-item :label="labels.State" class="el-form-item" prop="State" style="flex-grow: 1;">
-        <el-form-item :label="FormData.State" class="el-form-item" prop="State" style="flex-grow: 2;"></el-form-item>
-        <!-- <el-input v-model="FormData.State" :placeholder="labels.State" :readonly="true"></el-input> -->
+        <el-input v-model="FormData.State" :placeholder="labels.State" :readonly="true"></el-input>
       </el-form-item>
     </div>
     <el-form-item size="small">
@@ -426,7 +425,7 @@
   <el-button @click="onClose">{{ ButtonTextCancel }}</el-button>
 </div>
 <script type="application/javascript">
-  function permitNumberFourActivity_Init(me) {
+  function rejectedActivity_Init(me) {
     me.VueConfig.data = Object.assign(me.VueConfig.data, {
       readonly: false,
       labels: WorkflowDesignerConstants.ActivityFormLabel,

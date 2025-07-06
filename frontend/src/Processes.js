@@ -19,10 +19,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const schemeNameMap = {
-  permit_type_main_for_engine_1: "Construction",
-  permit_type_main_for_engine_2: "Parking / Occupancy",
-  permit_type_main_for_engine_3: "Commercial Vehicle",
-  permit_type_main_for_engine_4: "Public Space Rental",
+  commercial_vehicle_1: "Commercial Vehicle",
 };
 
 const Processes = (props) => {

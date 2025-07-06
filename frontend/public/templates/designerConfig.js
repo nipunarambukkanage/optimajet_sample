@@ -1,8 +1,21 @@
 window.DesignerConfig = {
   allowedActivities: [
-    "PermitNumberOneActivity",
-    "PermitNumberTwoActivity",
-    "PermitNumberThreeActivity",
-    "PermitNumberFourActivity"
-  ]
+    "ApprovedPendingPaymentActivity",
+    "ExpiredActivity",
+    "IncompleteActivity",
+    "IssuedActivity",
+    "LapsedActivity",
+    "OperatorVerifiedActivity",
+    "PaidActivity",
+    "RejectedActivity",
+    "RevokedActivity",
+    "TechnicianAssignedActivity",
+
+    "AutoIssueAfterPaymentActivity",
+
+    "EXPTeamReviewActivity",
+    "FreightTeamReviewActivity",
+    "OtherReviewRequiredActivity",
+    "ResubmitActivity",
+  ],
 };
